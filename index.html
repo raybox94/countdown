@@ -1,0 +1,116 @@
+<html>
+<head>
+<title>Count Down</title>
+<style>
+body{
+  background: #333;
+  overflow: hidden;
+  font-family: "Kanit", sans-serif;
+}
+
+#countdown{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #333;
+  user-select: none;
+}
+
+.ct_block{
+  display: inline-block;
+  height: 150px;
+  width: 150px;
+  background: #ffa528;
+  box-shadow: inset 0px 0px 10px #000;
+}
+
+.ct_value{
+  font-size: 60px;
+  position: relative;
+  top: 50%;
+  transform: translate(0%, -50%);
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.25);
+}
+
+.ct_unit{
+  transform: translate(0%, -50%);
+  position: relative;
+  top: 25%;
+  left: 0px;
+  font-size: 24px;
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.25);
+}
+
+.ct_row{
+  margin-bottom: 3px;
+}
+
+
+</style>
+<script>
+jQuery(document).ready(function(){
+  countdownInterval = setInterval(function(){
+    updateCountdown();
+  }, 1000);
+});
+
+function updateCountdown(){
+  timeNow = Date.now();
+  timeGoal = new Date("Jul 4, 2019 11:00:00").getTime();
+  distance = timeGoal - timeNow;
+  
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+  if(distance <= 0){
+    jQuery(".ct_days").text("0");
+    jQuery(".ct_hours").text("0");
+    jQuery(".ct_minutes").text("0");
+    jQuery(".ct_seconds").text("0");
+    clearInterval(countdownInterval);
+  } else {
+    jQuery(".ct_days").text(days);
+    jQuery(".ct_hours").text(hours);
+    jQuery(".ct_minutes").text(minutes);
+    jQuery(".ct_seconds").text(seconds);
+  }
+}
+
+</script>
+</head>
+<body>
+
+<div id="countdown">
+  <div class="ct_block">
+    <div class="ct_days ct_value"></div>
+    <div class="ct_unit">Days</div>
+  </div>
+  <div class="ct_block">
+    <div class="ct_hours ct_value"></div>
+    <div class="ct_unit">Hours</div>
+  </div>
+  <div class="ct_block">
+    <div class="ct_minutes ct_value"></div>
+    <div class="ct_unit">Minutes</div>
+  </div>
+  <div class="ct_block">
+    <div class="ct_seconds ct_value"></div>
+    <div class="ct_unit">Seconds</div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
